@@ -18,7 +18,8 @@
     "volleyball": "^1.5.1"
   },
   "scripts": {
-    "start": "ts-node ./server/server.ts & react-scripts start",
+    "start:server": "ts-node --project tsconfig.server.json ./server/server.ts",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
