@@ -1,0 +1,8 @@
+{
+    "extends": "../frontend/tsconfig",
+    "compilerOptions": {
+        "outDir": "../server-compiled",
+        "module": "commonjs"
+    },
+    "include": ["./server/*"],
+}

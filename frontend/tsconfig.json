@@ -13,7 +13,6 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "noImplicitAny": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -21,6 +20,6 @@
     "jsx": "preserve"
   },
   "include": [
-    ["src", "./src/**/*", "server"]
+    "src"
   ]
 }
