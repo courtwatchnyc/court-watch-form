@@ -33,7 +33,7 @@ class LoginController {
     };
 
     @get('/logout')
-    getLogout(req: RequestWithBody, res: Response) {
+    getLogout(req: Request, res: Response) {
         req.session = undefined;
         res.redirect('/');
     };
