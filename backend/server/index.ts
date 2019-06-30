@@ -4,7 +4,7 @@ import cookieSession from 'cookie-session';
 import { AppRouter } from './AppRouter';
 import './controllers/LoginController';
 import './controllers/RouteController';
-const {db, User} = require('./db/models')
+const {sequelize, User} = require('./db/models');
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(AppRouter.getInstance());
 
 
 const init = async () => {
-    await db.sync({ force: true }),
+    await sequelize.sync({ force: true }),
     app.listen(8080, () => {
         console.log('Serving up sick beats on 8080')
     });

@@ -1,11 +1,27 @@
-import {Sequelize, DataTypes} from 'sequelize';
-export const db = new Sequelize('postgres://localhost:5432/courtwatch_nyc');
+const User = require('./user')
+const BailDefense = require('./bail-defense')
+const BailJudge = require('./bail-judge')
+const BailProsecution = require('./bail-prosecution')
+const Bail = require('./bail')
+const CaseResolution = require('./case-resolution')
+const Case = require('./case')
+const Charge = require('./charge')
+const CourtRoom = require('./courtroom')
+const Defendant = require('./defendant')
+const Judge = require('./judge')
+const PleaDiscussion = require('./plea-discussion')
 
-export const User = db.define('user', {
-    username: {
-        type: new DataTypes.STRING,
-    },
-    password: {
-        type: new DataTypes.STRING,
-    }
-})
+Defendant.belongsTo(Case)
+Case.hasOne(Defendant)
+
+//has stores in target -- belongs to stores in source
+Judge.hasMany(Case)
+CourtRoom.hasMany(Case)
+Charge.hasOne(Case)
+PleaDiscussion.hasOne(Case)
+CaseResolution.hasOne(Case)
+
+BailDefense.hasOne(Bail)
+BailProsecution.hasOne(Bail)
+BailJudge.hasOne(Bail)
+Bail.hasOne(Case)
