@@ -12,6 +12,7 @@ import Accused from './Accused';
 import Bail from './Bail';
 import Plea from './Plea';
 import React, {useState} from 'react';
+import { isTemplateElement } from "@babel/types";
 
 type ThemeProps = Theme & {
     spacing: number 
@@ -56,6 +57,7 @@ const styles = (theme: Theme) => createStyles({
 });
 
 const steps = ['Case', 'Charge', 'Defendent', 'Plea', 'Bail'];
+const bib = ['judge', 'volunteerName'];
 
 function getStepContent(step: number) {
   switch (step) {
@@ -78,14 +80,80 @@ interface State {
     activeStep: number
 }
 
+interface FormData {
+  date: string,
+  volunteerName: string,
+  borough: string,
+  courtroom: string,
+  judge: string,
+  ada: string,
+  docket: string,
+  penalLaw: string,
+  charge: string,
+  adtlCharge: string,
+  domesticViolence: boolean,
+  felony: boolean,
+  chargeNotes: string,
+  gender: string,
+  race: string,
+  age: string,
+  daSay: string,
+  plea: string,
+  pleaNotes: string,
+  caseResolution: string,
+  caseResolve: boolean,
+  pleaOptions: string,
+  sentence: string,
+  queens: boolean,
+}
+
+const initialState = {
+  date: "",
+  volunteerName: "",
+  borough: "",
+  courtroom: "",
+  judge: "",
+  ada: "",
+  docket: "",
+  penalLaw: "",
+  charge: "",
+  adtlCharge: "",
+  domesticViolence: false,
+  felony: false,
+  chargeNotes: "",
+  gender: "",
+  race: "",
+  age: "",
+  daSay: "",
+  plea: "",
+  pleaNotes: "",
+  caseResolution: "",
+  caseResolve: false,
+  pleaOptions: "",
+  sentence: "",
+  queens: false,
+}
+
 interface Props {
     classes: any
 }
 
 const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
+    const [userData, setUserData] = useState<FormData>(initialState)
     const [activeStep, setActiveStep] = useState<number>(0)
-    const handleNext = () => {
+    const updateValues = (key: any) => setUserData({...userData,
+      [key]: key.value})
+
+    const handleNext = (document:any) => {
+      console.log("doc", document)
         let newStep = activeStep + 1
+        for (let key in userData) { 
+          const pib = document.getElementById(key) ? document.getElementById(key) : ''
+          if (pib) {
+            console.log("key", pib.value)
+            updateValues(key)
+          }
+        }
         setActiveStep(newStep)
       };
     
@@ -118,11 +186,10 @@ const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
                     //replace with Component for all case files
                   <React.Fragment>
                     <Typography variant="h5" gutterBottom>
-                      Thank you for your order.
+                      Thank you for submitted your form!
                     </Typography>
                     <Typography variant="subtitle1">
-                      Your order number is #2001539. We have emailed your order confirmation, and will
-                      send you an update when your order has shipped.
+                      Your volunteerism is appreciated.
                     </Typography>
                   </React.Fragment>
                 ) : (
@@ -137,7 +204,7 @@ const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleNext}
+                        onClick={() => handleNext(document)}
                         className={classes.button}
                       >
                         {activeStep === steps.length - 1 ? 'Submit' : 'Next'}

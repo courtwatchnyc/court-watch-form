@@ -1,0 +1,1 @@
+export const bib = ['judge', 'volunteerName']
