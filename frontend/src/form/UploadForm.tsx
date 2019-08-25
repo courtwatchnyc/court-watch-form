@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 const UploadForm = () => {
+    //this probably doesn't need to be it's own file
     return (
         <label
             className="upload-file"
