@@ -16,6 +16,7 @@ export const GridContainer = (props: DropDownProps) => {
 
 //currently in use with the Material Route
 const Accused = () => {
+  // same here, i'd pop these datums out
   const gender = ['M', 'F', 'GNC', 'TM', 'TF'];
   const race = ['W', 'B', 'L', 'NA', 'SA', 'EA'];
   const ageGroup = ['16-24', '25-34', '35-44', '45-54', '55+']
