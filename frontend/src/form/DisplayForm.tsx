@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Case from './Case';
 import Charge from './Charge';
 import Accused from './Accused';
-import Bail from './Bail';
+import {Bail} from './Bail';
 import Plea from './Plea';
 import React, {useState} from 'react';
 import { isTemplateElement } from "@babel/types";
@@ -139,6 +139,7 @@ interface Props {
 }
 
 const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
+    // consider calling these userDataKeys & setUserDataValues
     const [userData, setUserData] = useState<FormData>(initialState)
     const [activeStep, setActiveStep] = useState<number>(0)
     const updateValues = (key: any) => setUserData({...userData,
@@ -147,6 +148,7 @@ const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
     const handleNext = (document:any) => {
       console.log("doc", document)
         let newStep = activeStep + 1
+        // change pib value for htmlElementKey
         for (let key in userData) { 
           const pib = document.getElementById(key) ? document.getElementById(key) : ''
           if (pib) {
@@ -167,6 +169,7 @@ const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
       };
       const { classes } = props;
       return (
+        // you could use HTMLs <section id= ''> 
         <React.Fragment>
           <CssBaseline />
           <main className={classes.layout}>
