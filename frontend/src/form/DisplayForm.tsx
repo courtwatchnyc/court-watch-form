@@ -105,6 +105,27 @@ interface FormData {
   pleaOptions: string,
   sentence: string,
   queens: boolean,
+  prosecution_cashBail: string,
+  prosecution_bondBail: string,
+  prosecution_otherBail: string,
+  prosecution_ror: string,
+  prosecution_remand: string,
+  prosecution_supervisedRelease: string,
+  prosecution_orderOfProtection: string,
+  defense_cashBail: string,
+  defense_bondBail: string,
+  defense_otherBail: string,
+  defense_ror: string,
+  defense_remand: string,
+  defense_supervisedRelease: string,
+  defense_orderOfProtection: string,
+  judge_cashBail: string,
+  judge_bondBail: string,
+  judge_otherBail: string,
+  judge_ror: string,
+  judge_remand: string,
+  judge_supervisedRelease: string,
+  judge_orderOfProtection: string,
 }
 
 const initialState = {
@@ -132,6 +153,27 @@ const initialState = {
   pleaOptions: "",
   sentence: "",
   queens: false,
+  prosecution_cashBail: '',
+  prosecution_bondBail: '',
+  prosecution_otherBail: '',
+  prosecution_ror: '',
+  prosecution_remand: '',
+  prosecution_supervisedRelease: '',
+  prosecution_orderOfProtection: '',
+  defense_cashBail: '',
+  defense_bondBail: '',
+  defense_otherBail: '',
+  defense_ror: '',
+  defense_remand: '',
+  defense_supervisedRelease: '',
+  defense_orderOfProtection: '',
+  judge_cashBail: '',
+  judge_bondBail: '',
+  judge_otherBail: '',
+  judge_ror: '',
+  judge_remand: '',
+  judge_supervisedRelease: '',
+  judge_orderOfProtection: '',
 }
 
 interface Props {
@@ -142,20 +184,21 @@ const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
     // consider calling these userDataKeys & setUserDataValues
     const [userData, setUserData] = useState<FormData>(initialState)
     const [activeStep, setActiveStep] = useState<number>(0)
-    const updateValues = (key: any) => setUserData({...userData,
-      [key]: key.value})
+    const updateValues = (newState: {[key: string]: string | boolean}) => setUserData({...userData,
+      ...newState})
 
     const handleNext = (document:any) => {
-      console.log("doc", document)
         let newStep = activeStep + 1
         // change pib value for htmlElementKey
+        let stateToChangeObject: {[key: string]: string | boolean} = {};
         for (let key in userData) { 
-          const pib = document.getElementById(key) ? document.getElementById(key) : ''
-          if (pib) {
-            console.log("key", pib.value)
-            updateValues(key)
+          const keyExists = document.getElementById(key) ? document.getElementById(key) : '';
+          if (keyExists) {
+            console.log("new state to capture", stateToChangeObject)
+            stateToChangeObject[key] = keyExists.value;
           }
         }
+        updateValues(stateToChangeObject)
         setActiveStep(newStep)
       };
     
@@ -221,10 +264,5 @@ const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
         </React.Fragment>
       );
     }
-
-
-// DisplayForm.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export const MainDisplayForm = withStyles(styles)(DisplayForm);

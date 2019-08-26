@@ -79,6 +79,7 @@ interface IContentComponentProps extends ISubheaderProps {
 export const TextInput = (props: IContentComponentProps) => {
   const {val, direction, content} = props
   const renderFourColumns = [0,1,2,3]
+  const renderPrefixToId = ['', 'prosecution', 'defense', 'judge']
   return (
       <Grid container spacing={2}>
       {renderFourColumns.map(idx => {
@@ -94,7 +95,7 @@ export const TextInput = (props: IContentComponentProps) => {
           return (
             <Grid direction="row" key={idx} item xs={3} sm={3}>
               <TextField
-                id={content.id}
+                id={`${renderPrefixToId[idx]}_${content.id}`}
                 name={content.name}
                 label={content.label}
                 autoComplete={content.autoComplete}
@@ -114,6 +115,7 @@ export const TextInput = (props: IContentComponentProps) => {
 export const CheckboxInput = (props: IContentComponentProps) => {
     const {val, direction, content} = props
     const renderFourColumns = [0,1,2,3]
+    const renderPrefixToId = ['', 'prosecution', 'defense', 'judge']
     return (
         <Grid container spacing={2}>
         {renderFourColumns.map(idx => {
@@ -129,8 +131,8 @@ export const CheckboxInput = (props: IContentComponentProps) => {
             return (
               <Grid direction="row" key={idx} item xs={3} sm={3}>
                 <Checkbox
-                  id={content.id}
-                />
+                  id={`${renderPrefixToId[idx]}_${content.id}`}
+                  />
               </Grid>
             )
             }
@@ -144,6 +146,7 @@ export const CheckboxInput = (props: IContentComponentProps) => {
   export const DropDownInput = (props: IContentComponentProps) => {
     const {val, direction, content, dropDownOptions} = props
     const renderFourColumns = [0,1,2,3]
+    const renderPrefixToId = ['', 'prosecution', 'defense', 'judge']
     return (
         <Grid container spacing={2}>
         {renderFourColumns.map(idx => {
@@ -159,7 +162,7 @@ export const CheckboxInput = (props: IContentComponentProps) => {
             return (
               <Grid direction="row" key={idx} item xs={3} sm={3}>
                 <DropDown
-                  id={content.id}
+                  id={`${renderPrefixToId[idx]}_${content.id}`}
                   name={content.name}
                   label={content.label}
                   autoComplete={content.autoComplete}
