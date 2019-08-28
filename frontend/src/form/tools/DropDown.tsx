@@ -15,38 +15,31 @@ export interface DropDownProps {
 }
 
 interface State {
-    age: string,
-    labelWidth: number | undefined
+    value: string,
 }
 
 const DropDown = (props: DropDownProps) => {
-    const {dropDownOptions, label} = props
+    const {id, name, dropDownOptions, label} = props
     const valuesForDropDown: (string | number)[] = Array.isArray(dropDownOptions) ? dropDownOptions : [10, 20, 30]
     const {width} = props
-  const [state, setState] = React.useState<State>({
-    age: '',
-    labelWidth: width,
-  });
+  const [value, setValue] = React.useState('');
   const inputLabelRef = React.useRef(null);
 
-  const handleChange = (name: keyof State) => (event: React.ChangeEvent<{ value: unknown }>) => {
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
+  const handleChange = (event: any) => {
+    setValue((event.target as HTMLSelectElement).value);
   };
 
   return (
     <div>
       <FormControl fullWidth={true}>
-        <InputLabel htmlFor="age-native-simple">{label}</InputLabel>
+        <InputLabel htmlFor={name}>{label}</InputLabel>
         <Select
           native
-          value={state.age}
-          onChange={handleChange('age')}
+          value={value}
+          onChange={(e) => handleChange(e)}
           inputProps={{
-            name: 'age',
-            id: 'age-native-simple',
+            name,
+            id,
           }}
         >
           <option value="" />

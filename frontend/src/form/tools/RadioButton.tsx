@@ -8,40 +8,44 @@ import React, {useState} from 'react';
 
 
 interface RadioProps {
-    options: (string | number)[]
+    id: string,
+    options: (string | number)[],
+    value: string,
 }
 
 const RadioButton = (props: RadioProps) => {
+    const {id, options} = props;
     const [selectValue, setSelectValue] = useState("")
-    function handleChange(event: React.ChangeEvent<unknown>) {
-        console.log("handleChange");
-        setSelectValue((event.target as HTMLInputElement).value);
+    function handleChange(event: any) {
+        let { value } = props;
+        setSelectValue(event.target.value);
+        value = event.target.label;
     };
 
     return (
-    <Grid item>
-        <FormControl>
-            <FormLabel>Duration of the Case</FormLabel>
-            <RadioGroup
-                style={{ flexDirection: "row" }}
-                value={selectValue}
-                onChange={handleChange}
-            >
-            {
-                props.options.map((val, idx) => {
-                    return (
-                        <FormControlLabel
-                            key={val}
-                            control={<Radio />}
-                            label={val}
-                            value={(++idx).toString()}
-                        />
-                    )
-                })
-            }
-            </RadioGroup>
-        </FormControl>
-    </Grid>
+        <Grid item>
+            <FormControl>
+                <FormLabel>Duration of the Case</FormLabel>
+                <RadioGroup
+                    style={{ flexDirection: "row" }}
+                    value={selectValue}
+                    onChange={handleChange}
+                    >
+                {
+                    options.map((val, idx) => {
+                        return (
+                            <FormControlLabel
+                                id={val.toString()}
+                                control={<Radio />}
+                                label={val}
+                                value={(++idx).toString()}
+                            />
+                        )
+                    })
+                }
+                </RadioGroup>
+            </FormControl>
+        </Grid>
     )
 }
 

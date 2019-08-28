@@ -129,16 +129,16 @@ const Case = () => {
           }
             <Grid item xs={12}>
             <FormControlLabel
-                control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+                control={<Checkbox id="interpreterNeeded" color="secondary" name="interpreterNeeded" value="false" />}
                 label="Interpreter Needed"
             />
             <FormControlLabel
-                control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+                control={<Checkbox id="interpreterPresent" color="secondary" name="interpreterPresent" value="false" />}
                 //disable if previous is not selected
                 label="Interpreter Present"
             />
             </Grid>
-            <RadioButton options={duration}/>
+            <RadioButton value={""} id="duration" options={duration}/>
         </Grid>
     </div>
   );
