@@ -30,7 +30,7 @@ const RadioButton = (props: RadioProps) => {
                     style={{ flexDirection: "row" }}
                     value={selectValue}
                     onChange={handleChange}
-                    >
+                >
                 {
                     options.map((val, idx) => {
                         return (

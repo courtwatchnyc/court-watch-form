@@ -37,11 +37,11 @@ const Plea = () => {
         })
         }
         <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
+          id="pleaNotes"
+          label="Plea Notes"
           multiline
           rows="10"
-          defaultValue="Notes about the plea discussion"
+          defaultValue="Notes go here"
           margin="normal"
           variant="outlined"
           fullWidth

@@ -34,11 +34,11 @@ const Charge = () => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
+          id="chargeNotes"
+          label="Notes about the Charges"
           multiline
           rows="6"
-          defaultValue="Notes about the charges"
+          defaultValue="Notes go here!"
           margin="normal"
           variant="outlined"
           fullWidth
