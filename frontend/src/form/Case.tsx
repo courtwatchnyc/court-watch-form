@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import RadioButton from './tools/RadioButton'
 import DropDown from './tools/DropDown'
 import UploadForm from './UploadForm'
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export interface HeaderProps {
     title: string
@@ -99,6 +99,11 @@ const fieldsToPopulate = [
 
 const Case = () => {
     const duration = ['< 2 min', '2-5 min', '5+ min']
+    const [isInterpreterNeeded, setIsInterpreterNeeded] = useState(false);
+    const [isInterpreterPresent, setIsInterpreterPresent] = useState(false);
+    // check why this turns into string when on state
+    const handleIntNeeded = (e: any) => setIsInterpreterNeeded(!!e.target.checked)
+    const handleIntPresent = (e: any) => setIsInterpreterPresent(!!e.target.checked)
     const today = () => {
         let returnDate: string | Date = new Date()
         let dd = String(returnDate.getDate()).padStart(2, '0')
@@ -129,12 +134,11 @@ const Case = () => {
           }
             <Grid item xs={12}>
             <FormControlLabel
-                control={<Checkbox id="interpreterNeeded" color="secondary" name="interpreterNeeded" value="false" />}
+                control={<Checkbox onChange={e => handleIntNeeded(e)} id="interpreterNeeded" value={isInterpreterNeeded} color="secondary" name="interpreterNeeded" />}
                 label="Interpreter Needed"
             />
             <FormControlLabel
-                control={<Checkbox id="interpreterPresent" color="secondary" name="interpreterPresent" value="false" />}
-                //disable if previous is not selected
+                control={<Checkbox onChange={e => handleIntPresent(e)} id="interpreterPresent" value={isInterpreterPresent} color="secondary" name="interpreterPresent" />}
                 label="Interpreter Present"
             />
             </Grid>
