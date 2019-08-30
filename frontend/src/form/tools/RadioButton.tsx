@@ -11,10 +11,11 @@ interface RadioProps {
     id: string,
     options: (string | number)[],
     value: string,
+    onChange: (e: any) => void
 }
 
 const RadioButton = (props: RadioProps) => {
-    const {id, options} = props;
+    const {id, options, onChange} = props;
     const [selectValue, setSelectValue] = useState("")
     function handleChange(event: any) {
         let { value } = props;
@@ -38,6 +39,7 @@ const RadioButton = (props: RadioProps) => {
                                 id={val.toString()}
                                 control={<Radio />}
                                 label={val}
+                                onChange={e => onChange(e)}
                                 value={(++idx).toString()}
                             />
                         )

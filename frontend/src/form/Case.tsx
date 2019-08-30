@@ -101,9 +101,11 @@ const Case = () => {
     const duration = ['< 2 min', '2-5 min', '5+ min']
     const [isInterpreterNeeded, setIsInterpreterNeeded] = useState(false);
     const [isInterpreterPresent, setIsInterpreterPresent] = useState(false);
+    const [caseDuration, setCaseDuration] = useState('')
     // check why this turns into string when on state
     const handleIntNeeded = (e: any) => setIsInterpreterNeeded(!!e.target.checked)
     const handleIntPresent = (e: any) => setIsInterpreterPresent(!!e.target.checked)
+    const handleDuration = (e: any) => setCaseDuration(e.target.label)
     const today = () => {
         let returnDate: string | Date = new Date()
         let dd = String(returnDate.getDate()).padStart(2, '0')
@@ -142,7 +144,7 @@ const Case = () => {
                 label="Interpreter Present"
             />
             </Grid>
-            <RadioButton value={""} id="duration" options={duration}/>
+            <RadioButton onChange={handleDuration} value={caseDuration} id="duration" options={duration}/>
         </Grid>
     </div>
   );
