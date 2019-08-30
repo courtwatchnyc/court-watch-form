@@ -53,6 +53,8 @@ export const Header = (props: HeaderProps) => {
     )
 }
 
+// I am wondering whether we need this... trade off is: harder to understand, it's the only page that uses this abstracted approach. 
+// may be easier for other to collaborate on this if we just hardcode the HTML fields in the GridContainer const like we do on the other page containers.
 export const GridContainer = (props: GridProps) => {
     const isDate = (props.name === "date") ? "date" : "type"
     const [render, setRender] = React.useState<RenderComponent>("TextField")
@@ -82,10 +84,13 @@ export const GridContainer = (props: GridProps) => {
     )
 }
 
+// lol ... the trend lives on, son
 export const testNames = ['Jon Snow', 'Sansa Stark', `Jaqen H'ghar`, 'Missandei']
 
 export const testCourtRooms = [`King's County`, `Queen's Criminal Court`, `Midtown Community Court`]
 
+// i think we should also move these out into a dataTypes file that specifies data entry elements & their types
+// we should try to isolate display rendering (HTML / JSX Logic) from content (data) [this comment is only relevant if we keep the abstracted GridContainer const above as is]
 const fieldsToPopulate = [
     {name: "date", label: "Date", type:"TextField", dropDownOptions:false},
     {name: "volunteerName", label: "Volunteer Name", type:"DropDown", dropDownOptions:[...testNames, 'Zoe Adel']},
@@ -98,7 +103,9 @@ const fieldsToPopulate = [
 ]
 
 const Case = () => {
+    // same with this below, we should pop this out
     const duration = ['< 2 min', '2-5 min', '5+ min']
+    // cool with keeping this here as long as we don't need the today date formatter in any of the other sections
     const today = () => {
         let returnDate: string | Date = new Date()
         let dd = String(returnDate.getDate()).padStart(2, '0')

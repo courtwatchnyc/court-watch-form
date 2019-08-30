@@ -8,6 +8,7 @@ import DropDown from './tools/DropDown';
 import React from 'react';
 
 const Charge = () => {
+    //same here!
     const charges = ['Not Mentioned', `Couldn't Hear`, 'Assault', 'Burglary']
     const additionalChargeOptions = ['Yes', 'No', 'Not Sure']
   return (
