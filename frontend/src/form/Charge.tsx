@@ -5,11 +5,15 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import DropDown from './tools/DropDown';
-import React from 'react';
+import React, {useState} from 'react';
 
 const Charge = () => {
     const charges = ['Not Mentioned', `Couldn't Hear`, 'Assault', 'Burglary']
     const additionalChargeOptions = ['Yes', 'No', 'Not Sure']
+    const [isDomesticViolence, setIsDomesticViolence] = useState(false)
+    const [isFelony, setIsFelony] = useState(false)
+    const handleDomesticViolence = (e: any) => setIsDomesticViolence(!!e.target.checked)
+    const handleFelony = (e: any) => setIsFelony(!!e.target.checked)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -24,11 +28,11 @@ const Charge = () => {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
+            control={<Checkbox onChange={e => handleDomesticViolence(e)} color="secondary" name="domesticViolence" id="domesticViolence" value={isDomesticViolence} />}
             label="Domestic Violence"
           />
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
+            control={<Checkbox onChange={e => handleFelony(e)} color="secondary" name="felony" id="felony" value={isFelony} />}
             label="Felony"
           />
         </Grid>
