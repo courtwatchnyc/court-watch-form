@@ -4,9 +4,15 @@ import {GridContainer} from './Accused';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
-import React from 'react';
+import React, {useState} from 'react';
 
 const Plea = () => {
+  //state
+  const [isCaseResolved, setIsCaseResolved] = useState(false);
+  const [isQueens, setIsQueens] = useState(false);
+  //set state
+  const handleCaseResolution = (e: any) => setIsCaseResolved(!!e.target.checked)
+  const handleQueensWaiver = (e: any) => setIsQueens(!!e.target.checked)
   //should this move into a class?
   const daOptions = ["Dismissal", "No offer/rec", "Offer/Rec"];
   const pleaOptionsFromDA = ["Top Charge", "Disorderly", "Unlicensed Driving", "ACD or marijuana ACD", "Other"];
@@ -60,7 +66,7 @@ const Plea = () => {
             />
         <Grid item xs={12} sm={8}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            control={<Checkbox onChange={e => handleCaseResolution(e)} color="secondary" name="caseResolve" id="caseResolve" value={isCaseResolved} />}
             //disable if previous is not selected
             label="Did the case resolve?"
           />
@@ -82,7 +88,7 @@ const Plea = () => {
                 sm={6}
         />
         <FormControlLabel
-          control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+          control={<Checkbox onChange={e => handleQueensWaiver(e)} color="secondary" name="queens" id="queens" value={isQueens} />}
           //disable if previous is not selected
           label="Queens: Waive 190.5 Right"
         />

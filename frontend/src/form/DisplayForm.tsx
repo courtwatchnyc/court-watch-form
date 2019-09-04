@@ -200,7 +200,6 @@ const DisplayForm: React.FC<Props & WithStyles<'root'>> = (props: any) => {
         for (let key in userData) { 
           const keyExists = document.getElementById(key) ? document.getElementById(key) : '';
           if (keyExists) {
-            console.log("new state to capture", stateToChangeObject)
             stateToChangeObject[key] = keyExists.value;
           }
         }

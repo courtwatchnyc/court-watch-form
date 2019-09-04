@@ -1,9 +1,23 @@
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React, {useState, ReactNode} from 'react';
 import Grid, { GridProps } from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import DropDown from './DropDown';
+
+type stateForCheckboxInput =
+  | "prosecution_ror"
+  | "defense_ror"
+  | "judge_ror"
+  | "prosecution_remand"
+  | "defense_remand"
+  | "judge_remand"
+  | "prosecution_supervisedRelease"
+  | "defense_supervisedRelease"
+  | "judge_supervisedRelease"
+  | "prosecution_orderOfProtection"
+  | "defense_orderOfProtection"
+  | "judge_orderOfProtection"
 
 // the header of each stepped through part of the form
 export interface IHeaderProps {
@@ -109,16 +123,39 @@ export const TextInput = (props: IContentComponentProps) => {
   )
 }
 
-
-
-
 export const CheckboxInput = (props: IContentComponentProps) => {
     const {val, direction, content} = props
     const renderFourColumns = [0,1,2,3]
     const renderPrefixToId = ['', 'prosecution', 'defense', 'judge']
+
+    const [state, setState] = useState({
+      prosecution_ror: false,
+      defense_ror: false,
+      judge_ror: false,
+      prosecution_remand: false,
+      defense_remand: false,
+      judge_remand: false,
+      prosecution_supervisedRelease: false,
+      defense_supervisedRelease: false,
+      judge_supervisedRelease: false,
+      prosecution_orderOfProtection: false,
+      defense_orderOfProtection: false,
+      judge_orderOfProtection: false,
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+      let currentVal = state[id as stateForCheckboxInput]
+      setState({...state, [id as stateForCheckboxInput]: !currentVal})
+    }
+
     return (
         <Grid container spacing={2}>
         {renderFourColumns.map(idx => {
+            const hyphenatedId = `${renderPrefixToId[idx]}_${content.id}`
+            let checkedVal: stateForCheckboxInput | undefined = undefined;
+            if (hyphenatedId in state) {
+              checkedVal = hyphenatedId as stateForCheckboxInput
+            }
             if (idx === 0) {
                 return (
                 <Grid direction={direction} item xs={3} sm={3}>
@@ -131,7 +168,9 @@ export const CheckboxInput = (props: IContentComponentProps) => {
             return (
               <Grid direction="row" key={idx} item xs={3} sm={3}>
                 <Checkbox
-                  id={`${renderPrefixToId[idx]}_${content.id}`}
+                  value={state[checkedVal as stateForCheckboxInput]}
+                  onChange={(e) => handleChange(e, hyphenatedId)}
+                  id={hyphenatedId}
                   />
               </Grid>
             )
